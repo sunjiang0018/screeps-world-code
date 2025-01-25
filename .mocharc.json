@@ -1,0 +1,15 @@
+{
+  "reporter": "spec",
+  "require": ["./test/setup-mocha.js"],
+  "package": "./package.json",
+  "loader": "ts-node/esm",
+  "es-module-specifier-resolution": "node",
+  "ui": "bdd",
+  "timeout": 5000,
+  "recursive": true,
+  "exit": true,
+  "extension": ["ts", "d.ts", "js"],
+  "watch-extension": ["ts"],
+  "full-trace": true,
+  "colors": true
+}

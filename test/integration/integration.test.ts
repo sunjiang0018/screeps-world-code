@@ -1,5 +1,5 @@
-import {assert} from "chai";
-import {helper} from "./helper";
+import { assert } from "chai";
+import { helper } from "./helper";
 
 describe("main", () => {
   it("runs a server and matches the game tick", async function () {

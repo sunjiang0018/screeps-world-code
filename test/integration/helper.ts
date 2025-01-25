@@ -1,6 +1,7 @@
-const { readFileSync } = require('fs');
-const _ = require('lodash');
-const { ScreepsServer, stdHooks } = require('screeps-server-mockup');
+import { readFileSync } from 'fs';
+import * as _ from 'lodash';
+import {ScreepsServer, stdHooks} from 'screeps-server-mockup';
+import User from 'screeps-server-mockup/dist/src/user';
 const DIST_MAIN_JS = 'dist/main.js';
 
 /*
@@ -9,8 +10,8 @@ const DIST_MAIN_JS = 'dist/main.js';
  * manipulating the terrain and game state.
  */
 class IntegrationTestHelper {
-  private _server: any;
-  private _player: any;
+  private _server!: ScreepsServer;
+  private _player!: User;
 
   get server() {
     return this._server;
