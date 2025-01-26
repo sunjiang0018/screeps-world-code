@@ -1,3 +1,4 @@
+import { Memory, Game } from './../../test/unit/mock';
 export * from "./CreepTypes";
 import { WorkTarget } from "./CreepTypes";
 import { WorkType } from "./WorkType";
@@ -33,6 +34,8 @@ declare global {
   namespace NodeJS {
     interface Global {
       log: any;
+      Memory: Memory;
+      Game: Game;
     }
   }
 }

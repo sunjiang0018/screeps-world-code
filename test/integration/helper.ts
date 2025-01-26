@@ -2,6 +2,9 @@ import { readFileSync } from 'fs';
 import * as _ from 'lodash';
 import {ScreepsServer, stdHooks} from 'screeps-server-mockup';
 import User from 'screeps-server-mockup/dist/src/user';
+import { getServer } from './serverUtils';
+
+
 const DIST_MAIN_JS = 'dist/main.js';
 
 /*
@@ -22,7 +25,7 @@ class IntegrationTestHelper {
   }
 
   async beforeEach() {
-    this._server = new ScreepsServer();
+    this._server = await getServer();
 
     // reset world but add invaders and source keepers bots
     await this._server.world.reset();
@@ -39,22 +42,15 @@ class IntegrationTestHelper {
     // Start server
     await this._server.start();
   }
-
-  async afterEach() {
-    await this._server.stop();
-  }
 }
+
+beforeEach(async () => {
+  await stdHooks.hookWrite();
+});
 
 beforeEach(async () => {
   await helper.beforeEach();
 });
 
-afterEach(async () => {
-  await helper.afterEach();
-});
-
-before(() => {
-  stdHooks.hookWrite();
-});
 
 export const helper = new IntegrationTestHelper();

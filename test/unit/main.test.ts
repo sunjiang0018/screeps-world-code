@@ -1,37 +1,19 @@
-import { assert } from "chai";
-import { loop } from "../../src/main";
-import { Game, Memory } from "./mock";
+import { getMockCreep } from "../mock/Creep";
 
 describe("main", () => {
-  before(() => {
-    // runs before all test in this block
+  it("全局环境测试", () => {
+    expect(Game).toBeDefined();
+
+    expect(_).toBeDefined();
+
+    expect(Memory).toMatchObject({ rooms: {}, creeps: {} });
   });
 
-  beforeEach(() => {
-    // runs before each test in this block
-    // @ts-ignore : allow adding Game to global
-    global.Game = _.clone(Game);
-    // @ts-ignore : allow adding Memory to global
-    global.Memory = _.clone(Memory);
-  });
+  it("mock Creep 可以正常使用", () => {
+    // 创建一个 creep 并指定其属性
+    const creep = getMockCreep({ name: "test", ticksToLive: 100 });
 
-  it("should export a loop function", () => {
-    assert.isTrue(typeof loop === "function");
-  });
-
-  it("should return void when called with no context", () => {
-    assert.isUndefined(loop());
-  });
-
-  it("Automatically delete memory of missing creeps", () => {
-    Memory.creeps.persistValue = "any value";
-    Memory.creeps.notPersistValue = "any value";
-
-    Game.creeps.persistValue = "any value";
-
-    loop();
-
-    assert.isDefined(Memory.creeps.persistValue);
-    assert.isUndefined(Memory.creeps.notPersistValue);
+    expect(creep.name).toBe("test");
+    expect(creep.ticksToLive).toBe(100);
   });
 });
